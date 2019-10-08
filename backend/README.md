@@ -72,20 +72,131 @@ This README is missing documentation of your endpoints. Below is an example for 
 
 Endpoints
 GET '/categories'
-GET ...
-POST ...
-DELETE ...
+GET '/questions'
+GET '/categories/<int:category_id>/questions'
+POST '/questions'
+POST '/questions?searchTerm='title''
+POST '/quizzes'
+DELETE '/questions/<int:question_id>'
 
 GET '/categories'
-- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- Fetches all categories
 - Request Arguments: None
-- Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
-{'1' : "Science",
-'2' : "Art",
-'3' : "Geography",
-'4' : "History",
-'5' : "Entertainment",
-'6' : "Sports"}
+- Returns: A list of dictionaries containing categories type and id
+[
+{id:'1', type: "Science"}
+{id:'2', type: "Art"}
+{id:'3', type: "Geography"}
+{id:'4', type: "History"}
+{id:'5', type: "Entertainment"}
+{id:'6', type: "Sports"}
+]
+
+GET '/questions'
+- Fetches all questions with pagination limit of 10 per page, total number of questions and categories
+- Request Arguments: None
+- Returns: A list of dictionaries containing questions, categories and total_questions
+questions:  [
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 2,
+    }
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 3,
+    }
+    ]
+total_questions:3 
+categories: [
+{id:'1', type: "Science"}
+{id:'2', type: "Art"}
+{id:'3', type: "Geography"}
+{id:'4', type: "History"}
+{id:'5', type: "Entertainment"}
+{id:'6', type: "Sports"}
+]
+
+GET '/categories/<int:category_id>/questions'
+- Fetches single category questions
+- Request Arguments: category_id
+- Returns: A list of dictionaries containing the categories questions
+[
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+    {
+      'question': 'who am i',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+]
+
+POST '/questions'
+- Creates new question
+- Request Arguments: json object containing question, answer, difficulty level and category id
+- Returns: status code indicating success or failure
+
+POST '/questions?searchTerm='title''
+- Fetches all questions containing the search term
+- Request Arguments: json object containing searchTerm
+- Returns: A list of dictionaries containing the questions
+[
+    {
+      'question': 'which title',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+    {
+      'question': 'what title',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+    {
+      'question': 'title',
+      'answer': 'i am tunji',
+      'difficulty': 1,
+      'category': 1,
+    }
+]
+
+POST '/quizzes'
+- Fetches a single question 
+- Request Arguments: json object containing a list of previous questions id and category
+- Returns: a dictionary containing a single random question 
+{
+  'question': 'title',
+  'answer': 'i am tunji',
+  'difficulty': 1,
+  'category': 1,
+}
+
+DELETE '/questions/<int:question_id>'
+- Deletes a question
+- Request Arguments: question id
+- Returns: a dictionary containing the id of the question deleted
+
 
 ```
 
